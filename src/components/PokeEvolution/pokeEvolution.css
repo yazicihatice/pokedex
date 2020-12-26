@@ -1,0 +1,30 @@
+.pokemon-evolution-image{
+    cursor: pointer;
+    text-align: center;
+}
+
+.pokemon-evolution-panel-wrapper{
+    display: flex;
+    justify-content: space-evenly;
+    background: linear-gradient(90deg, rgba(201,201,205,1) 0%, rgba(137,137,138,0.9122023809523809) 53%, rgba(107,108,108,1) 100%);
+    border-radius: 30px;
+    padding: 10px 5px;
+}
+
+.next-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.next-icon:before {
+    content: "\f054";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    color: rgb(71, 71, 71);
+    font-size: 45px;
+    padding: 0.5em;
+  }
