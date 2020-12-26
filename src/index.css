@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  background-color: aliceblue;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -11,3 +12,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.home-page-list-item {
+  list-style-type: none;
+  margin-right: 20px;
+  font-weight: bold;
+}
+
+.home-page-list-item a{
+  color: white;
+  text-decoration: none;
+}
+
+.home-page-list-wrapper{
+  display: flex;
+  background-color: rgb(49, 48, 48);
+  padding: 20px;
+  margin: 0px;
+}
+

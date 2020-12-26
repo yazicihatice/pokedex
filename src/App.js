@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import PokeCard from '../src/components/PokeCard/PokeCard';
+import PokeCardList from '../src/components/PokeCardList/PokeCardList';
+import MyCollection from "./components/MyCollection/MyCollection";
+import PokeDetail from "./components/PokeDetail/PokeDetail";
 
-function App() {
+export default function App() { //TODO: configden al burdaki datayı
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <nav>
+          <ul className='home-page-list-wrapper'>
+            <li className='home-page-list-item'>
+              <Link to="/">Home</Link>
+            </li>
+            <li className='home-page-list-item'>
+              <Link to="/myCollection">My Collection</Link>
+            </li>
+          </ul>
+        </nav>
+
+        <Switch>
+          <Route path="/detail" component ={PokeDetail}/>
+          <Route path="/myCollection" component={MyCollection}>
+          </Route>
+          <Route path="/" component={PokeCardList}/>
+        </Switch>
+      </div>
+    </Router>
   );
 }
-
-export default App;
