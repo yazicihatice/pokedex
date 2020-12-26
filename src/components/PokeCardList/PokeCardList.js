@@ -18,7 +18,7 @@ class PokeCardList extends React.Component {
   };
 
   componentDidMount(){
-    const collectionData = JSON.parse(localStorage.getItem("myCollection"));
+    const collectionData = JSON.parse(localStorage.getItem("myCollection")) || {};
 
     this.setState({collectionData}, () => {
       this.loadPokemonListFromApi();
@@ -74,7 +74,7 @@ class PokeCardList extends React.Component {
       const {pokemonList, collectionData} = this.state;
       const {addPokemonToCollection} = this;
 
-  return (<>
+    return (<>
       <div className='pokemon-list-screen-header'>POKEDEX</div>
         <div className={'pokemon-list-container'}>
            {pokemonList.map((pokemon, i) => ( 
