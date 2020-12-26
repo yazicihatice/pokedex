@@ -1,0 +1,88 @@
+.pokemon-detail-top{
+    display: flex;
+}
+
+.pokemon-detail-wrapper{
+    margin: 0 10%;
+}
+
+@media screen and (max-width: 400px) {
+    .pokemon-detail-wrapper {
+        margin: 0%;
+    }
+    .pokemon-stat-name{
+        font-size: 9px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+
+  .pokemon-detail-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+  .top-five-moves-wrapper{
+    margin: 20px 0;
+  }
+  .pokemon-evolution-panel-wrapper{
+      flex-direction: column;
+      width: 70%;
+      margin: 20px 0;
+      background: linear-gradient(180deg, rgba(201,201,205,1) 0%, rgba(137,137,138,0.9122023809523809) 53%, rgba(107,108,108,1) 100%);
+  }
+  .pokemon-evolution-panel-wrapper .next-icon:before{
+    content: "\f078";    
+  }
+}
+
+@media screen and (min-width: 700px) and (max-width: 1200px){
+    .pokemon-detail-wrapper{
+        display: grid;
+        grid-template-areas:
+        'pokeCard pokeCard'
+        'moves stats'
+        'evolution evolution';
+        grid-gap: 20px;
+    }
+    .poke-card-container {
+        grid-area: pokeCard;
+    }
+    .top-five-moves-wrapper{
+        grid-area: moves;
+    }
+    .pokemon-stats-info-wrapper{
+        grid-area: stats;
+    }
+    .pokemon-evolution-panel-wrapper{
+        grid-area: evolution;
+    }
+}
+
+@media screen and (min-width: 1200px){
+    .pokemon-detail-wrapper{
+        display: grid;
+        grid-template-areas:
+        'pokeCard pokeCard moves moves moves'
+        'pokeCard pokeCard stats stats stats'
+        'evolution evolution evolution evolution evolution';
+        margin: 0 20%;
+        grid-column-gap: 20px;
+        grid-row-gap: 20px;
+    }
+    .poke-card-container {
+        grid-area: pokeCard;
+        min-width: 300px;
+    }
+    .top-five-moves-wrapper {
+        grid-area: moves;
+        max-width: 50%;
+    }
+    .pokemon-stats-info-wrapper{
+        grid-area: stats;
+    }
+    .pokemon-evolution-panel-wrapper{
+        grid-area: evolution;
+    }
+}
+  
