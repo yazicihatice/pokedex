@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './pokemonlist.css';
-import {getPokemonImages, getPokemonList} from '../../services/services';
+import {getPokemonList} from '../../services/services';
 import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import { LIMIT } from '../../constants';
@@ -82,12 +82,12 @@ class PokeCardList extends React.Component {
                     <div className="pokemon-name-and-image">
                         <div className="pokemon-card-name-text">{pokemon.name}</div>
                         <div className = 'pokemon-list-card-image-wrapper'>
-                            <img src= {pokemon.imageSource} width={400} height={400}/>
+                            <img src= {pokemon.imageSource} alt = "pokemonImage" width={400} height={400}/>
                         </div>  
                     </div>
                     <div className="overlay">
                     <Link to={{pathname: "/detail", state: {pokemonInfo: pokemon, pokemonList} }}>
-                            <div className="icon detail-icon" className={`icon ${collectionData[pokemon.id] ? 'centered-detail-icon': 'detail-icon'}`} title="Pokemon Detail">
+                            <div className={`icon ${collectionData[pokemon.id] ? 'centered-detail-icon': 'detail-icon'}`} title="Pokemon Detail">
                                 <i className="fa fa-eye fa-xs"></i>
                             </div>
                     </Link> 

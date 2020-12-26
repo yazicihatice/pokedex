@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { getAllPokemonInfo, getEvolutionChainData } from '../../services/services';
 import Moves from '../Moves/Moves';
 import PokeCard from '../PokeCard/PokeCard';

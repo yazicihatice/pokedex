@@ -5,7 +5,6 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import PokeCard from '../src/components/PokeCard/PokeCard';
 import PokeCardList from '../src/components/PokeCardList/PokeCardList';
 import MyCollection from "./components/MyCollection/MyCollection";
 import PokeDetail from "./components/PokeDetail/PokeDetail";

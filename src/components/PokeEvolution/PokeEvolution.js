@@ -8,7 +8,7 @@ const PokeEvolution = (props) => {
         {evolutionDataArr.map((evolutionPokemon, i) => {
 
                 let pokeImage = <div key = {i} className = 'pokemon-evolution-image'>
-                            <img src= {evolutionPokemon.imageSource} width={100} height={100}/>
+                            <img src= {evolutionPokemon.imageSource} alt= "pokemonImage" width={100} height={100}/>
                     </div> 
 
                 if(i >= evolutionDataArr.length-1){

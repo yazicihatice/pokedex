@@ -13,8 +13,7 @@ const PokeCard = (props) => {
         } = {},
         pokemonData: {
             weight,
-            height,
-            name
+            height
         } = {},
         imageSource
       } = props;
@@ -23,7 +22,7 @@ const PokeCard = (props) => {
       return (
         <div className={`poke-card-container ${colorName+'-card-container'}`}>
             <div className = 'pokemon-card-image-wrapper'>
-                        <img src= {imageSource} width={200} height={200}/>
+                        <img src= {imageSource} alt= "pokemonCardImage" width={200} height={200}/>
             </div>
            <div className='poke-card-row-wrapper'> 
             <div className='poke-card-field-title-wrapper'>

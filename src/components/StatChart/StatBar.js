@@ -27,8 +27,8 @@ const StatBar = (props) => {
 
     return(<li>
             <ul className='pokemon-stats-rows-list'>
-                {chunksColorInfo.map(classNameForColor => (
-                    <li className={classNameForColor}></li>       
+                {chunksColorInfo.map((classNameForColor, i) => (
+                    <li key = {i} className={classNameForColor}></li>       
                 ))}
                 <span className='pokemon-stat-name'>{name}</span>
 
