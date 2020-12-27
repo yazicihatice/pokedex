@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "./mycollection.css";
 
 export default class CollectionItem extends React.Component {

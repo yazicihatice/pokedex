@@ -2,7 +2,6 @@ import React from "react";
 import "./pokemonlist.css";
 import PokeCardListItem from "./PokeCardListItem";
 import { getPokemonList } from "../../services/services";
-import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import { LIMIT } from "../../constants";
 
