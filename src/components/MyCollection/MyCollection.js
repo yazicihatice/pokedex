@@ -1,59 +1,95 @@
-import React from 'react';
-import './mycollection.css';
-
+import React from "react";
+import ReactPaginate from "react-paginate";
+import { LIMIT } from "../../constants";
+import CollectionItem from "./CollectionItem";
+import "./mycollection.css";
 
 class MyCollection extends React.Component {
-
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-        collectionList:{} 
-    }
-  };
-
-  componentDidMount(){
-    const collectionList = localStorage.getItem("myCollection") ? JSON.parse(localStorage.getItem("myCollection")) : {};
-    this.setState({collectionList});
+      collectionList: {},
+      pageCount:0,
+      offset: 0
+    };
   }
 
-    removeFromCollection = (pokemon) => {
-        const selectedPokemonId = pokemon.id;
-        const collectionList = JSON.parse(localStorage.getItem('myCollection'));
+  componentDidMount() {
+    let collectionList = localStorage.getItem("myCollection")
+      ? JSON.parse(localStorage.getItem("myCollection"))
+      : {};
+    const pageCount = Math.ceil(Object.keys(collectionList).length / LIMIT);
+    collectionList = Object.values(collectionList).slice(this.state.offset,LIMIT);
 
-        delete collectionList[selectedPokemonId];
+    this.setState({ collectionList, pageCount });
+  }
 
-        localStorage.setItem('myCollection', JSON.stringify(collectionList));
-        this.setState({collectionList})
-    };
+  handlePageClick = (data) => {
+    const offset = data.selected;
+    const currentIndex = Math.ceil(offset * LIMIT);
+    const collectionList = Object.values(JSON.parse(localStorage.getItem("myCollection"))).slice(currentIndex, currentIndex + LIMIT);
+    
+    this.setState({
+      offset,
+      collectionList
+    })
+  };
 
-    render(){
-        const {collectionList} = this.state;
-        const collectionArray = Object.values(collectionList);
+  removeFromCollection = (pokemon) => {
+    let { offset: currentPage } = this.state;
+    const selectedPokemonId = pokemon.id;
+    const collectionList = JSON.parse(localStorage.getItem("myCollection"));
+    const { [selectedPokemonId]: deletedObj, ...restOfCollectionList } = collectionList;
 
-        return(<>
-            <div className='collection-pokemon-list-screen-header'>MY COLLECTION</div>
-            <div className={'collection-pokemon-list-container'}>
-               {collectionArray.length ? collectionArray.map((pokemon, i) => ( 
-                     <div key={i} className={'collection-pokemon-card-list-view'}>
-                        <div className="collection-pokemon-name-and-image">
-                            <div className="collection-pokemon-card-name-text">{pokemon.name}</div>
-                            <div className = 'collection-pokemon-list-card-image-wrapper'>
-                                <img src= {pokemon.imageSource} alt='pokemonImage' width={400} height={400}/>
-                            </div>  
-                        </div>
-                        <div className="overlay">
-                                <div onClick = {() => this.removeFromCollection(pokemon)} className="icon remove-collection-icon" title="Add Collection">
-                                    <i className="fa fa-minus-circle fa-xs"></i>
-                                </div>
-                        </div>
-                    </div>  
-               )): <span>You've got no pokemon in your collection :(</span>} 
-            </div>
-            </>
-        )
+    const pageCount = Math.ceil(Object.keys(restOfCollectionList).length/ LIMIT);
+
+    localStorage.setItem('myCollection', JSON.stringify(restOfCollectionList));
+    let newCurrentPage;
+    if (currentPage <= pageCount) {
+      newCurrentPage = currentPage;
+    } else {
+      newCurrentPage = pageCount - 1;
     }
-    
-    
+    this.setState({ pageCount }, () => this.handlePageClick({ selected: newCurrentPage }));
+  };
+
+  render() {
+    const { collectionList } = this.state;
+    const { removeFromCollection } = this;
+    const collectionArray = Object.values(collectionList);
+
+    return (
+      <>
+        <div className="collection-pokemon-list-screen-header">
+          MY COLLECTION
+        </div>
+        <div className={"collection-pokemon-list-container"}>
+          {collectionArray.length ? (
+            collectionArray.map((pokemon, index) => (
+              <CollectionItem pokemon={pokemon} index={index} removeFromCollection={removeFromCollection}/>
+            ))
+          ) : (
+            <span>You've got no pokemon in your collection :(</span>
+          )}
+        </div>
+        <div className="pokemon-list-pagination">
+          <ReactPaginate
+            previousLabel={"previous"}
+            nextLabel={"next"}
+            breakLabel={"..."}
+            breakClassName={"break-me"}
+            pageCount={this.state.pageCount}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={this.handlePageClick}
+            containerClassName={"pagination"}
+            subContainerClassName={"pages pagination"}
+            activeClassName={"active"}
+          />
+        </div>
+      </>
+    );
+  }
 }
-  
+
 export default MyCollection;

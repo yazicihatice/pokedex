@@ -1,26 +1,25 @@
-import React from 'react';
-import StatBar from './StatBar';
-import './statchart.css';
+import React from "react";
+import StatBar from "./StatBar";
+import "./statchart.css";
 
 const StatChart = (props) => {
-        const {chunkCount, statChartData} = props;
+  const { chunkCount, statChartData } = props;
 
-        return(<> 
-              <div className='pokemon-stats-info-wrapper'>
-                   <span className='stats-header'>Stats</span> 
-                <ul className='pokemon-stats-columns-list'>
-                    {statChartData.map(stat => (
-                        <StatBar barData= {stat} chunkCount={chunkCount}/>
-                    ))}
-                </ul>
-              </div>
-               </> 
-        )
+  return (
+    <>
+      <div className="pokemon-stats-info-wrapper">
+        <span className="stats-header">Stats</span>
+        <ul className="pokemon-stats-columns-list">
+          {statChartData.map((stat, index) => (
+            <StatBar barData={stat} key={index} chunkCount={chunkCount} />
+          ))}
+        </ul>
+      </div>
+    </>
+  );
+};
 
-}
-  
 export default StatChart;
-
 
 // const statChartData = [
 //     {name: 'HP', value: 150 ,maxValue: MAX_STAT_VALUE},

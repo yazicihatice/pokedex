@@ -1,21 +1,49 @@
 .pokemon-list-container {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.pokemon-card-list-view{
-    background-color: #cecece;
-    border: 2px solid white;
-    border-radius: 35px;
-    position: relative;
-    margin: 10px;
-    box-shadow: 3px 3px 3px #666;
+.pokemon-card-list-view {
+  background-color: #cecece;
+  border: 2px solid white;
+  border-radius: 35px;
+  position: relative;
+  margin: 10px;
+  box-shadow: 3px 3px 3px #666;
 }
 
 .pokemon-card-list-view:hover .overlay {
   opacity: 1;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  border-radius: 35px;
+  background: rgba(0, 0, 0, 0.5);
+  transition: 0.5s ease;
+}
+
+.overlay-touch {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 1;
+  transition: 0.5s ease;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 35px;
 }
 
 .pokemon-card-list-view:hover .pokemon-name-and-image {
@@ -38,16 +66,16 @@
   color: white;
 }
 
-.detail-icon{
+.detail-icon {
   left: 37%;
 }
 
-.centered-detail-icon{
-  left:50%;
+.centered-detail-icon {
+  left: 50%;
 }
 
-.add-collection-icon{
-  left:63%;
+.add-collection-icon {
+  left: 63%;
 }
 
 .overlay {
@@ -59,27 +87,27 @@
   height: 100%;
   width: 100%;
   opacity: 0;
-  transition: .5s ease;
+  transition: 0.5s ease;
 }
 
-.pokemon-card-name-text{
-    background-color: #FFFFFF;
-    position: absolute;
-    padding: 5px;
-    border-radius: 33px 5px 33px 5px;
-    border: 3px solid black;
-    top: 0px;
-    padding: 10px;
-    cursor: default;
+.pokemon-card-name-text {
+  background-color: #ffffff;
+  position: absolute;
+  padding: 5px;
+  border-radius: 33px 5px 33px 5px;
+  border: 3px solid black;
+  top: 0px;
+  padding: 10px;
+  cursor: default;
 }
 
-.pokemon-list-card-image-wrapper{
+.pokemon-list-card-image-wrapper {
   width: 400px;
   height: 400px;
   cursor: pointer;
 }
 
-.pokemon-card-add-button{
+.pokemon-card-add-button {
   position: absolute;
   right: 2px;
   cursor: pointer;
@@ -89,7 +117,7 @@
   transform: scale(1.1);
 }
 
-.pokemon-list-screen-header{
+.pokemon-list-screen-header {
   font-size: 40px;
   font-weight: bold;
   text-align: center;
@@ -98,7 +126,7 @@
   text-transform: capitalize;
 }
 
-.pokemon-list-pagination{
+.pokemon-list-pagination {
   display: flex;
   justify-content: center;
   margin-top: 30px;
@@ -125,11 +153,11 @@
   border-radius: 10px;
   margin-left: -1px;
 }
-.pagination>li>a:focus{
+.pagination > li > a:focus {
   outline: none;
 }
 
-.pagination>li.active>a {
+.pagination > li.active > a {
   color: #fff;
   background-color: rgb(88, 106, 206);
   outline: none;
@@ -137,26 +165,25 @@
 
 /* Style the active class (and buttons on mouse-over) */
 .pagination > li > a:hover {
-  background-color:  rgb(88, 106, 206);;
+  background-color: rgb(88, 106, 206);
   color: white;
 }
 .pagination > li:first-child > a,
 .pagination > li:first-child > span {
   margin-left: 0;
-    padding: 0px;
+  padding: 0px;
   border-bottom-left-radius: 4px;
   border-top-left-radius: 4px;
-  display: none!important;
+  display: none !important;
 }
 .pagination > li:last-child > a,
 .pagination > li:last-child > span {
   border-bottom-right-radius: 4px;
   margin-right: 0;
-  padding: 0px!important;
+  padding: 0px !important;
   border-top-right-radius: 4px;
-  display: none!important;
+  display: none !important;
 }
-
 
 /* @media screen and (min-width: 768px) {
   .pokemon-card-list-view {

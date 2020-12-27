@@ -1,11 +1,11 @@
-import axios from 'axios';
+import axios from "axios";
 
-const baseURL = 'https://pokeapi.co/api/v2/';
+const baseURL = "https://pokeapi.co/api/v2/";
 
 const instance = axios.create({
-        baseURL
+  baseURL,
 });
 
-instance.defaults.headers.post['Content-Type'] = 'application/json';
+instance.defaults.headers.post["Content-Type"] = "application/json";
 
 export default instance;

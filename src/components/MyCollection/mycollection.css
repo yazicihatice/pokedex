@@ -1,19 +1,18 @@
 .collection-pokemon-list-container {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.collection-pokemon-card-list-view{
-    background-color: #cecece;
-    border: 2px solid white;
-    border-radius: 35px;
-    position: relative;
-    margin: 10px;
-    box-shadow: 3px 3px 3px #666;
+.collection-pokemon-card-list-view {
+  background-color: #cecece;
+  border: 2px solid white;
+  border-radius: 35px;
+  position: relative;
+  margin: 10px;
+  box-shadow: 3px 3px 3px #666;
 }
-
 
 .collection-pokemon-card-list-view:hover .overlay {
   opacity: 1;
@@ -39,8 +38,8 @@
   color: white;
 }
 
-.remove-collection-icon{
-  left:50%;
+.remove-collection-icon {
+  left: 50%;
 }
 
 .overlay {
@@ -52,27 +51,39 @@
   height: 100%;
   width: 100%;
   opacity: 0;
-  transition: .5s ease;
+  transition: 0.5s ease;
 }
 
-.collection-pokemon-card-name-text{
-    background-color: #FFFFFF;
-    position: absolute;
-    padding: 5px;
-    border-radius: 33px 5px 33px 5px;
-    border: 3px solid black;
-    top: 0px;
-    padding: 10px;
-    cursor: default;
+.overlay-touch {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 1;
+  transition: 0.5s ease;
 }
 
-.collection-pokemon-list-card-image-wrapper{
+.collection-pokemon-card-name-text {
+  background-color: #ffffff;
+  position: absolute;
+  padding: 5px;
+  border-radius: 33px 5px 33px 5px;
+  border: 3px solid black;
+  top: 0px;
+  padding: 10px;
+  cursor: default;
+}
+
+.collection-pokemon-list-card-image-wrapper {
   width: 400px;
   height: 400px;
   cursor: pointer;
 }
 
-.collection-pokemon-card-add-button{
+.collection-pokemon-card-add-button {
   position: absolute;
   right: 2px;
   cursor: pointer;
@@ -82,7 +93,7 @@
   transform: scale(1.1);
 }
 
-.collection-pokemon-list-screen-header{
+.collection-pokemon-list-screen-header {
   font-size: 40px;
   font-weight: bold;
   text-align: center;
@@ -148,7 +159,6 @@
   border-top-right-radius: 4px;
   display: none!important;
 } */
-
 
 /* @media screen and (min-width: 768px) {
   .pokemon-card-list-view {
