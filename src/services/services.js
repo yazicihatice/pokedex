@@ -1,4 +1,3 @@
-import axios from "axios";
 import instance from "../axiosConfig";
 
 export const getPokemonList = async (limit, offset) => {
