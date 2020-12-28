@@ -1,7 +1,8 @@
 import React from "react";
-import {
-  getAllPokemonInfo,
+import { 
   getEvolutionChainData,
+  getPokemonInfo,
+  getPokemonSpeciesInfo,
 } from "../../services/services";
 import Moves from "../Moves/Moves";
 import PokeCard from "../PokeCard/PokeCard";
@@ -9,6 +10,7 @@ import PokeEvolution from "../PokeEvolution/PokeEvolution";
 import StatChart from "../StatChart/StatChart";
 import { MAX_STAT_VALUE } from "../../constants";
 import "./pokedetail.css";
+import { isEmpty } from "../../utils";
 
 const chunkCount = 15;
 
@@ -28,28 +30,41 @@ class PokeDetail extends React.Component {
 
   async componentDidMount() {
     const {
-      pokemonInfo: { name } = {},
+      pokemonInfo: { name, id } = {},
       pokemonList,
     } = this.props.location.state;
 
-    const { speciesResult, pokemonResult } = await getAllPokemonInfo(name);
+    let speciesResult = {};
+    let pokemonResult = {};
+    try {
+      const { data } = await getPokemonSpeciesInfo(name);  
+      speciesResult = data;
+    } catch (error) {
+      console.error('Could not fetch species info!');
+    }
+    try {
+      const { data } = await getPokemonInfo(id);
+      pokemonResult = data;
+    } catch (error) {
+      console.error('Could not fetch pokemon info!');
+    }
 
     const getEvolutionChainId = (thePath) =>
-      thePath.split("/")[thePath.split("/").length - 2];
+      thePath && thePath.split("/")[thePath.split("/").length - 2];
     const evolutionChainId = getEvolutionChainId(
       speciesResult.evolution_chain?.url
     );
 
-    const evolutionChainDataFromApi = await getEvolutionChainData(
+    const evolutionChainDataFromApi = (evolutionChainId && await getEvolutionChainData(
       evolutionChainId
-    );
+    )) || {};
 
     const evolutionArr = this.parseEvolutionData(
       evolutionChainDataFromApi.chain
     );
     const evolutionDataToShow = pokemonList.filter((pokemon) =>
       evolutionArr.includes(pokemon.name)
-    ); // TODO eldeki listenin dışında olduğunda bilgiye ulaşılmıyor tekrar servis çağrısı gerekebilir
+    );
 
     const statChartData = this.parseStatChartData(pokemonResult.stats);
 
@@ -63,39 +78,43 @@ class PokeDetail extends React.Component {
 
   parseEvolutionData = (evolutionChain) => {
     const evolutionArr = [];
-    let {
-      species: { name },
-      evolves_to,
-    } = evolutionChain;
-    evolutionArr.push(name);
-
-    while (evolves_to.length !== 0) {
-      const {
+    if (evolutionChain) {
+      let {
         species: { name },
-      } = evolves_to[0];
+        evolves_to,
+      } = evolutionChain;
       evolutionArr.push(name);
-      evolves_to = evolves_to[0].evolves_to;
+  
+      while (evolves_to.length !== 0) {
+        const {
+          species: { name },
+        } = evolves_to[0];
+        evolutionArr.push(name);
+        evolves_to = evolves_to[0].evolves_to;
+      }
     }
-
     return evolutionArr;
   };
 
   parseStatChartData = (stats) => {
     let statChartArr = [];
 
-    for (let i = 0; i < stats.length; i++) {
-      const {
-        base_stat,
-        stat: { name },
-      } = stats[i];
-
-      statChartArr[i] = {
-        value: base_stat,
-        name,
-        maxValue: MAX_STAT_VALUE,
-      };
+    if (stats) {
+      for (let i = 0; i < stats.length; i++) {
+        const {
+          base_stat,
+          stat: { name },
+        } = stats[i];
+  
+        statChartArr[i] = {
+          value: base_stat,
+          name,
+          maxValue: MAX_STAT_VALUE,
+        };
+      }
+  
     }
-
+    
     return statChartArr;
   };
 
@@ -119,10 +138,9 @@ class PokeDetail extends React.Component {
             pokemonData={pokemonData}
             imageSource={imageSource}
           />
-          <Moves movesArr={pokemonData.moves} />
-          <StatChart statChartData={statChartData} chunkCount={chunkCount} />
-
-          <PokeEvolution evolutionData={evolutionData} />
+          {!isEmpty(pokemonData.moves) && <Moves movesArr={pokemonData.moves} />}
+          {!isEmpty(statChartData) && <StatChart statChartData={statChartData} chunkCount={chunkCount} />}
+          {!isEmpty(evolutionData) && <PokeEvolution evolutionData={evolutionData} />}
         </div>
       </>
     );

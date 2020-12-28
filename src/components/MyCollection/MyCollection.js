@@ -69,7 +69,7 @@ class MyCollection extends React.Component {
               <CollectionItem pokemon={pokemon} index={index} removeFromCollection={removeFromCollection}/>
             ))
           ) : (
-            <span>You've got no pokemon in your collection :(</span>
+            <span>You've got no pokemon in your collection.</span>
           )}
         </div>
         <div className="pokemon-list-pagination">

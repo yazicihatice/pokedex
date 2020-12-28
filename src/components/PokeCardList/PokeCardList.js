@@ -25,16 +25,16 @@ class PokeCardList extends React.Component {
     });
   }
 
-  loadPokemonListFromApi = () => {
-    getPokemonList(LIMIT, this.state.offset).then((resp) => {
+  loadPokemonListFromApi = (offset) => {
+    getPokemonList(LIMIT, offset).then((resp) => {
       let pokemonList = resp.results;
       let pokemonId;
 
       const getLastItem = (thePath) =>
-        thePath.split("/")[thePath.split("/").length - 2]; // TODO ortaklanabilir bu fonksiyon
+        thePath.split("/")[thePath.split("/").length - 2]; 
 
-      for (let i = 0; i < LIMIT; i++) {
-        pokemonId = getLastItem(pokemonList[i].url); // TODO son sayfada hata veriyor handle et
+        for (let i = 0; i < pokemonList.length; i++) {
+        pokemonId = getLastItem(pokemonList[i].url);
         pokemonList[
           i
         ].imageSource = `https://pokeres.bastionbot.org/images/pokemon/${pokemonId}.png`;
@@ -44,6 +44,7 @@ class PokeCardList extends React.Component {
       this.setState({
         pokemonList,
         pageCount: Math.ceil(resp.count / LIMIT),
+        offset
       });
     }); 
   };
@@ -52,9 +53,7 @@ class PokeCardList extends React.Component {
     const selected = data.selected;
     const offset = Math.ceil(selected * LIMIT);
 
-    this.setState({ offset }, () => {
-      this.loadPokemonListFromApi();
-    });
+      this.loadPokemonListFromApi(offset);
   };
 
   addPokemonToCollection = (pokemonInfo) => {

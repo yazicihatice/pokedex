@@ -5,7 +5,7 @@ import MyCollection from "./components/MyCollection/MyCollection";
 import PokeDetail from "./components/PokeDetail/PokeDetail";
 
 export default function App() {
-  //TODO: configden al burdaki datayı
+
   return (
     <Router>
       <div>
