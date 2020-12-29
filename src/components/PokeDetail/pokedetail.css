@@ -21,7 +21,8 @@
   }
   .pokemon-evolution-panel-wrapper {
     flex-direction: column;
-    margin: 20px 0;
+    margin: 20px auto;
+    width: 70%;
     background: linear-gradient(
       180deg,
       rgba(201, 201, 205, 1) 0%,
@@ -49,7 +50,7 @@
   .pokemon-evolution-panel-wrapper {
     flex-direction: column;
     width: 70%;
-    margin: 20px 0;
+    margin: 20px auto;
     background: linear-gradient(
       180deg,
       rgba(201, 201, 205, 1) 0%,
