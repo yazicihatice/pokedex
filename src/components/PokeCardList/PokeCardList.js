@@ -35,9 +35,7 @@ class PokeCardList extends React.Component {
 
         for (let i = 0; i < pokemonList.length; i++) {
         pokemonId = getLastItem(pokemonList[i].url);
-        pokemonList[
-          i
-        ].imageSource = `https://pokeres.bastionbot.org/images/pokemon/${pokemonId}.png`;
+        pokemonList[i].imageSource = `https://pokeres.bastionbot.org/images/pokemon/${pokemonId}.png`;
         pokemonList[i].id = pokemonId;
       }
 

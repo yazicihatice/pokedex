@@ -98,8 +98,6 @@ export default class PokeCardListItem extends React.Component {
             <img
               src={pokemon.imageSource}
               alt="pokemonImage"
-              width={400}
-              height={400}
             />
           </div>
         </div>
