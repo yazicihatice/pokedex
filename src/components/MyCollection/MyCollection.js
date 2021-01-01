@@ -45,7 +45,7 @@ class MyCollection extends React.Component {
 
     localStorage.setItem('myCollection', JSON.stringify(restOfCollectionList));
     let newCurrentPage;
-    if (currentPage <= pageCount) {
+    if (currentPage < pageCount) {
       newCurrentPage = currentPage;
     } else {
       newCurrentPage = pageCount - 1; 
