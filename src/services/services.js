@@ -1,18 +1,12 @@
 import instance from "../axiosConfig";
 
-export const getPokemonList = async (limit, offset) => {
-  try {
-    const response = await instance.get("pokemon", {
+export const getPokemonList = (limit, offset) => {
+    return instance.get("pokemon", {
       params: {
         limit,
         offset,
       },
     });
-
-    return response.data;
-  } catch (error) {
-    console.log(error);
-  }
 };
 
 export const getPokemonInfo = async (id) => {

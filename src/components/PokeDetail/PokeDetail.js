@@ -11,6 +11,7 @@ import StatChart from "../StatChart/StatChart";
 import { MAX_STAT_VALUE } from "../../constants";
 import "./pokedetail.css";
 import { isEmpty } from "../../utils";
+import Spinner from "../Spinner/Spinner";
 
 const chunkCount = 15;
 
@@ -25,6 +26,7 @@ class PokeDetail extends React.Component {
           url: "",
         },
       },
+      loading:true
     };
   }
 
@@ -73,6 +75,7 @@ class PokeDetail extends React.Component {
       pokemonData: pokemonResult,
       evolutionData: evolutionDataToShow,
       statChartData,
+      loading: false
     });
   }
 
@@ -124,10 +127,13 @@ class PokeDetail extends React.Component {
       pokemonData,
       evolutionData,
       statChartData,
+      loading
     } = this.state;
     const {
       pokemonInfo: { imageSource, name } = {},
     } = this.props.location.state;
+
+    if(loading) return <Spinner/>;
 
     return (
       <>

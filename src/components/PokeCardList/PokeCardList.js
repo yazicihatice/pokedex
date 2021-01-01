@@ -4,6 +4,7 @@ import PokeCardListItem from "./PokeCardListItem";
 import { getPokemonList } from "../../services/services";
 import ReactPaginate from "react-paginate";
 import { LIMIT } from "../../constants";
+import Spinner from '../Spinner/Spinner';
 
 class PokeCardList extends React.Component {
   constructor(props) {
@@ -12,7 +13,9 @@ class PokeCardList extends React.Component {
       pokemonList: [],
       offset: 0,
       pageCount: 0,
+      activePage: 0,
       collectionData: {},
+      loading: true
     };
   }
 
@@ -20,38 +23,46 @@ class PokeCardList extends React.Component {
     const collectionData =
       JSON.parse(localStorage.getItem("myCollection")) || {};
 
+    const { offset, activePage } = this.state;
+
     this.setState({ collectionData }, () => {
-      this.loadPokemonListFromApi();
+      this.loadPokemonListFromApi(offset, activePage);
     });
   }
 
-  loadPokemonListFromApi = (offset) => {
-    getPokemonList(LIMIT, offset).then((resp) => {
-      let pokemonList = resp.results;
+  loadPokemonListFromApi = async (offset, activePage) => {
+    try {
+      const { data } = await getPokemonList(LIMIT, offset);
+
+      let pokemonList = data.results;
       let pokemonId;
 
-      const getLastItem = (thePath) =>
-        thePath.split("/")[thePath.split("/").length - 2]; 
+      const getLastItem = (thePath) => thePath.split("/")[thePath.split("/").length - 2]; 
 
         for (let i = 0; i < pokemonList.length; i++) {
-        pokemonId = getLastItem(pokemonList[i].url);
-        pokemonList[i].imageSource = `https://pokeres.bastionbot.org/images/pokemon/${pokemonId}.png`;
-        pokemonList[i].id = pokemonId;
+          pokemonId = getLastItem(pokemonList[i].url);
+          pokemonList[i].imageSource = `https://pokeres.bastionbot.org/images/pokemon/${pokemonId}.png`;
+          pokemonList[i].id = pokemonId;
       }
 
       this.setState({
         pokemonList,
-        pageCount: Math.ceil(resp.count / LIMIT),
-        offset
+        pageCount: Math.ceil(data.count / LIMIT),
+        offset,
+        loading: false,
+        activePage
       });
-    }); 
+      
+    } catch (error){
+      console.error('Could not fetch pokemon list!');
+    };
   };
 
   handlePageClick = (data) => {
-    const selected = data.selected;
-    const offset = Math.ceil(selected * LIMIT);
+    const activePage = data.selected;
+    const offset = Math.ceil(activePage * LIMIT);
 
-      this.loadPokemonListFromApi(offset);
+    this.setState({loading: true}, () => this.loadPokemonListFromApi(offset, activePage));
   };
 
   addPokemonToCollection = (pokemonInfo) => {
@@ -76,8 +87,10 @@ class PokeCardList extends React.Component {
   };
 
   render() {
-    const { pokemonList } = this.state;
+    const { pokemonList, loading } = this.state;
 
+    if(loading) return <Spinner/>;
+    
     return (
       <>
         <div className="pokemon-list-screen-header">POKEDEX</div>
@@ -99,6 +112,7 @@ class PokeCardList extends React.Component {
             breakLabel={"..."}
             breakClassName={"break-me"}
             pageCount={this.state.pageCount}
+            forcePage={this.state.activePage}
             marginPagesDisplayed={2}
             pageRangeDisplayed={5}
             onPageChange={this.handlePageClick}
