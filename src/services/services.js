@@ -9,11 +9,11 @@ export const getPokemonList = (limit, offset) => {
     });
 };
 
-export const getPokemonInfo = async (id) => {
+export const getPokemonInfo = (id) => {
   return instance.get(`pokemon/${id}`);
 };
 
-export const getPokemonSpeciesInfo = async (pokemonName) => {
+export const getPokemonSpeciesInfo = (pokemonName) => {
   return instance.get(`pokemon-species/${pokemonName}`);
 };
 
