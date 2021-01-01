@@ -1,3 +1,5 @@
+import {MAX_STAT_VALUE} from '../constants';
+
 export const isEmpty = (value) => {
     if (!value) {
         return true;
@@ -10,3 +12,49 @@ export const isEmpty = (value) => {
     }
     
 };
+
+export const parseEvolutionData = (evolutionChain) => {
+    const evolutionArr = [];
+    if (evolutionChain) {
+      let {
+        species: { name },
+        evolves_to,
+      } = evolutionChain;
+      evolutionArr.push(name);
+  
+      while (evolves_to.length !== 0) {
+        const {
+          species: { name },
+        } = evolves_to[0];
+        evolutionArr.push(name);
+        evolves_to = evolves_to[0].evolves_to;
+      }
+    }
+    return evolutionArr;
+  };
+
+export const parseStatChartData = (stats) => {
+    let statChartArr = [];
+
+    if (stats) {
+      for (let i = 0; i < stats.length; i++) {
+        const {
+          base_stat,
+          stat: { name },
+        } = stats[i];
+  
+        statChartArr[i] = {
+          value: base_stat,
+          name,
+          maxValue: MAX_STAT_VALUE,
+        };
+      }
+  
+    }
+    
+    return statChartArr;
+  };
+
+export const checkIfTouchDevice = () => {
+    return window.matchMedia("(pointer: coarse)").matches;
+  };  

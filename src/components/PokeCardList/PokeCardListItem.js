@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./pokemonlist.css";
+import {checkIfTouchDevice} from '../../utils/index';
 
 export default class PokeCardListItem extends React.Component {
   constructor(props) {
@@ -30,10 +31,6 @@ export default class PokeCardListItem extends React.Component {
         overlayVisible: false,
       });
     }
-  };
-
-  isTouchDevice = () => {
-    return window.matchMedia("(pointer: coarse)").matches;
   };
 
   imageClicked = (isTouchDevice) => {
@@ -83,7 +80,7 @@ export default class PokeCardListItem extends React.Component {
     const { pokemon, index } = this.props;
     const { overlayVisible } = this.state;
     const { getOverLayDiv } = this;
-    const isTouchDevice = this.isTouchDevice();
+    const isTouchDevice = checkIfTouchDevice();
 
     return (
       <div

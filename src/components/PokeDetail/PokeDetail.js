@@ -8,9 +8,8 @@ import Moves from "../Moves/Moves";
 import PokeCard from "../PokeCard/PokeCard";
 import PokeEvolution from "../PokeEvolution/PokeEvolution";
 import StatChart from "../StatChart/StatChart";
-import { MAX_STAT_VALUE } from "../../constants";
 import "./pokedetail.css";
-import { isEmpty } from "../../utils";
+import { isEmpty, parseEvolutionData, parseStatChartData } from "../../utils";
 import Spinner from "../Spinner/Spinner";
 
 const chunkCount = 15;
@@ -61,14 +60,14 @@ class PokeDetail extends React.Component {
       evolutionChainId
     )) || {};
 
-    const evolutionArr = this.parseEvolutionData(
+    const evolutionArr = parseEvolutionData(
       evolutionChainDataFromApi.chain
     );
     const evolutionDataToShow = pokemonList.filter((pokemon) =>
       evolutionArr.includes(pokemon.name)
     );
 
-    const statChartData = this.parseStatChartData(pokemonResult.stats);
+    const statChartData = parseStatChartData(pokemonResult.stats);
 
     this.setState({
       speciesData: speciesResult,
@@ -78,48 +77,6 @@ class PokeDetail extends React.Component {
       loading: false
     });
   }
-
-  parseEvolutionData = (evolutionChain) => {
-    const evolutionArr = [];
-    if (evolutionChain) {
-      let {
-        species: { name },
-        evolves_to,
-      } = evolutionChain;
-      evolutionArr.push(name);
-  
-      while (evolves_to.length !== 0) {
-        const {
-          species: { name },
-        } = evolves_to[0];
-        evolutionArr.push(name);
-        evolves_to = evolves_to[0].evolves_to;
-      }
-    }
-    return evolutionArr;
-  };
-
-  parseStatChartData = (stats) => {
-    let statChartArr = [];
-
-    if (stats) {
-      for (let i = 0; i < stats.length; i++) {
-        const {
-          base_stat,
-          stat: { name },
-        } = stats[i];
-  
-        statChartArr[i] = {
-          value: base_stat,
-          name,
-          maxValue: MAX_STAT_VALUE,
-        };
-      }
-  
-    }
-    
-    return statChartArr;
-  };
 
   render() {
     const {
