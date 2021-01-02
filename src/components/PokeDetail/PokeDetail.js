@@ -9,7 +9,7 @@ import PokeCard from "../PokeCard/PokeCard";
 import PokeEvolution from "../PokeEvolution/PokeEvolution";
 import StatChart from "../StatChart/StatChart";
 import "./pokedetail.css";
-import { isEmpty, parseEvolutionData, parseStatChartData } from "../../utils";
+import { isEmpty, parseEvolutionData, parseStatChartData, getEvolutionChainId } from "../../utils";
 import Spinner from "../Spinner/Spinner";
 
 const chunkCount = 15;
@@ -20,6 +20,7 @@ class PokeDetail extends React.Component {
     this.state = {
       pokemonData: {},
       statChartData: [],
+      evolutionData: [],
       speciesData: {
         evolution_chain: {
           url: "",
@@ -37,6 +38,10 @@ class PokeDetail extends React.Component {
 
     let speciesResult = {};
     let pokemonResult = {};
+    let evolutionResult = {};
+    let evolutionDataToShow = [];
+    let statChartData = [];
+
     try {
       const { data } = await getPokemonSpeciesInfo(name);  
       speciesResult = data;
@@ -46,29 +51,23 @@ class PokeDetail extends React.Component {
     try {
       const { data } = await getPokemonInfo(id);
       pokemonResult = data;
+
+      statChartData = parseStatChartData(pokemonResult.stats);
     } catch (error) {
       console.error('Could not fetch pokemon info!');
     }
 
-    const getEvolutionChainId = (thePath) =>
-      thePath && thePath.split("/")[thePath.split("/").length - 2];
-    const evolutionChainId = getEvolutionChainId(
-      speciesResult.evolution_chain?.url
-    );
+    try {
+      const evolutionChainId = getEvolutionChainId(speciesResult);
+      const { data } = (evolutionChainId && await getEvolutionChainData(evolutionChainId)) || {};
+      evolutionResult = data;
 
-    const evolutionChainDataFromApi = (evolutionChainId && await getEvolutionChainData(
-      evolutionChainId
-    )) || {};
-
-    const evolutionArr = parseEvolutionData(
-      evolutionChainDataFromApi.chain
-    );
-    const evolutionDataToShow = pokemonList.filter((pokemon) =>
-      evolutionArr.includes(pokemon.name)
-    );
-
-    const statChartData = parseStatChartData(pokemonResult.stats);
-
+      const evolutionArr = parseEvolutionData(evolutionResult.chain);
+      evolutionDataToShow = pokemonList.filter((pokemon) => evolutionArr.includes(pokemon.name));
+    } catch (error) {
+      console.error('Could not fetch evolution info!');
+    }
+  
     this.setState({
       speciesData: speciesResult,
       pokemonData: pokemonResult,

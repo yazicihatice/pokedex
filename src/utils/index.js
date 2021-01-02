@@ -53,8 +53,14 @@ export const parseStatChartData = (stats) => {
     }
     
     return statChartArr;
-  };
+};
 
 export const checkIfTouchDevice = () => {
     return window.matchMedia("(pointer: coarse)").matches;
-  };  
+};
+
+export const getEvolutionChainId = (speciesResult) => {
+    const thePath = speciesResult.evolution_chain?.url;
+
+    return thePath && thePath.split("/")[thePath.split("/").length - 2];
+};
