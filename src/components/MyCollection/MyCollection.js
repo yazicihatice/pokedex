@@ -65,8 +65,8 @@ class MyCollection extends React.Component {
         </div>
         <div className={"collection-pokemon-list-container"}>
           {collectionArray.length ? (
-            collectionArray.map((pokemon, index) => (
-              <CollectionItem pokemon={pokemon} index={index} removeFromCollection={removeFromCollection}/>
+            collectionArray.map((pokemon) => (
+              <CollectionItem pokemon={pokemon} key={pokemon.name} removeFromCollection={removeFromCollection}/>
             ))
           ) : (
             <span>You've got no pokemon in your collection.</span>

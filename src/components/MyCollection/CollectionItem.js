@@ -60,12 +60,12 @@ export default class CollectionItem extends React.Component {
   };
 
   render() {
-    const { pokemon, index } = this.props;
+    const { pokemon } = this.props;
     const { overlayVisible } = this.state;
     const { getOverLayDiv, imageClicked } = this;
     const isTouchDevice = this.isTouchDevice();
 
-    return ( <div key={index} className={"collection-pokemon-card-list-view"} ref={this.imageContainerRef} onClick={imageClicked(isTouchDevice)}>
+    return ( <div className={"collection-pokemon-card-list-view"} ref={this.imageContainerRef} onClick={imageClicked(isTouchDevice)}>
         <div className="collection-pokemon-name-and-image">
           <div className="collection-pokemon-card-name-text">
             {pokemon.name}

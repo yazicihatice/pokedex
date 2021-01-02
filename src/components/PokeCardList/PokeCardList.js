@@ -101,7 +101,7 @@ class PokeCardList extends React.Component {
               pokemonList={pokemonList}
               addPokemonToCollection={this.addPokemonToCollection}
               collectionData={this.state.collectionData}
-              index={index}
+              key={index}
             />
           ))}
         </div>

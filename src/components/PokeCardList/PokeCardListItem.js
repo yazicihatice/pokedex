@@ -77,14 +77,13 @@ export default class PokeCardListItem extends React.Component {
   };
 
   render() {
-    const { pokemon, index } = this.props;
+    const { pokemon } = this.props;
     const { overlayVisible } = this.state;
     const { getOverLayDiv } = this;
     const isTouchDevice = checkIfTouchDevice();
 
     return (
       <div
-        key={index}
         ref={this.imageContainerRef}
         onClick={this.imageClicked(isTouchDevice)}
         className={"pokemon-card-list-view"}
