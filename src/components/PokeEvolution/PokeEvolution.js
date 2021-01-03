@@ -7,8 +7,7 @@ const PokeEvolution = (props) => {
   return (
     <div className="pokemon-evolution-panel-wrapper">
       {evolutionDataArr.map((evolutionPokemon, i) => {
-
-      let pokeImage = (
+        let pokeImage = (
           <div key={i} className="pokemon-evolution-image">
             <img
               src={evolutionPokemon.imageSource}
@@ -18,11 +17,12 @@ const PokeEvolution = (props) => {
             />
           </div>
         );
-        return i+1 >= evolutionDataArr.length ? (
+        return i + 1 >= evolutionDataArr.length ? (
           pokeImage
-        ) : (<>
+        ) : (
+          <>
             {pokeImage}
-          <div className="next-icon"></div>
+            <div className="next-icon"></div>
           </>
         );
       })}

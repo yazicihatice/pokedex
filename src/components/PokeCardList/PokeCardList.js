@@ -4,7 +4,7 @@ import PokeCardListItem from "./PokeCardListItem";
 import { getPokemonList } from "../../services/services";
 import ReactPaginate from "react-paginate";
 import { LIMIT } from "../../constants";
-import Spinner from '../Spinner/Spinner';
+import Spinner from "../Spinner/Spinner";
 
 class PokeCardList extends React.Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class PokeCardList extends React.Component {
       pageCount: 0,
       activePage: 0,
       collectionData: {},
-      loading: true
+      loading: true,
     };
   }
 
@@ -37,12 +37,15 @@ class PokeCardList extends React.Component {
       let pokemonList = data.results;
       let pokemonId;
 
-      const getLastItem = (thePath) => thePath.split("/")[thePath.split("/").length - 2]; 
+      const getLastItem = (thePath) =>
+        thePath.split("/")[thePath.split("/").length - 2];
 
-        for (let i = 0; i < pokemonList.length; i++) {
-          pokemonId = getLastItem(pokemonList[i].url);
-          pokemonList[i].imageSource = `https://pokeres.bastionbot.org/images/pokemon/${pokemonId}.png`;
-          pokemonList[i].id = pokemonId;
+      for (let i = 0; i < pokemonList.length; i++) {
+        pokemonId = getLastItem(pokemonList[i].url);
+        pokemonList[
+          i
+        ].imageSource = `https://pokeres.bastionbot.org/images/pokemon/${pokemonId}.png`;
+        pokemonList[i].id = pokemonId;
       }
 
       this.setState({
@@ -50,19 +53,20 @@ class PokeCardList extends React.Component {
         pageCount: Math.ceil(data.count / LIMIT),
         offset,
         loading: false,
-        activePage
+        activePage,
       });
-      
-    } catch (error){
-      console.error('Could not fetch pokemon list!');
-    };
+    } catch (error) {
+      console.error("Could not fetch pokemon list!");
+    }
   };
 
   handlePageClick = (data) => {
     const activePage = data.selected;
     const offset = Math.ceil(activePage * LIMIT);
 
-    this.setState({loading: true}, () => this.loadPokemonListFromApi(offset, activePage));
+    this.setState({ loading: true }, () =>
+      this.loadPokemonListFromApi(offset, activePage)
+    );
   };
 
   addPokemonToCollection = (pokemonInfo) => {
@@ -89,8 +93,8 @@ class PokeCardList extends React.Component {
   render() {
     const { pokemonList, loading } = this.state;
 
-    if(loading) return <Spinner/>;
-    
+    if (loading) return <Spinner />;
+
     return (
       <>
         <div className="pokemon-list-screen-header">POKEDEX</div>

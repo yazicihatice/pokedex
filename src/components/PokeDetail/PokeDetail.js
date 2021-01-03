@@ -1,5 +1,5 @@
 import React from "react";
-import { 
+import {
   getEvolutionChainData,
   getPokemonInfo,
   getPokemonSpeciesInfo,
@@ -9,7 +9,12 @@ import PokeCard from "../PokeCard/PokeCard";
 import PokeEvolution from "../PokeEvolution/PokeEvolution";
 import StatChart from "../StatChart/StatChart";
 import "./pokedetail.css";
-import { isEmpty, parseEvolutionData, parseStatChartData, getEvolutionChainId } from "../../utils";
+import {
+  isEmpty,
+  parseEvolutionData,
+  parseStatChartData,
+  getEvolutionChainId,
+} from "../../utils";
 import Spinner from "../Spinner/Spinner";
 
 const chunkCount = 15;
@@ -26,7 +31,7 @@ class PokeDetail extends React.Component {
           url: "",
         },
       },
-      loading:true
+      loading: true,
     };
   }
 
@@ -43,10 +48,10 @@ class PokeDetail extends React.Component {
     let statChartData = [];
 
     try {
-      const { data } = await getPokemonSpeciesInfo(name);  
+      const { data } = await getPokemonSpeciesInfo(name);
       speciesResult = data;
     } catch (error) {
-      console.error('Could not fetch species info!');
+      console.error("Could not fetch species info!");
     }
     try {
       const { data } = await getPokemonInfo(id);
@@ -54,26 +59,30 @@ class PokeDetail extends React.Component {
 
       statChartData = parseStatChartData(pokemonResult.stats);
     } catch (error) {
-      console.error('Could not fetch pokemon info!');
+      console.error("Could not fetch pokemon info!");
     }
 
     try {
       const evolutionChainId = getEvolutionChainId(speciesResult);
-      const { data } = (evolutionChainId && await getEvolutionChainData(evolutionChainId)) || {};
+      const { data } =
+        (evolutionChainId && (await getEvolutionChainData(evolutionChainId))) ||
+        {};
       evolutionResult = data;
 
       const evolutionArr = parseEvolutionData(evolutionResult.chain);
-      evolutionDataToShow = pokemonList.filter((pokemon) => evolutionArr.includes(pokemon.name));
+      evolutionDataToShow = pokemonList.filter((pokemon) =>
+        evolutionArr.includes(pokemon.name)
+      );
     } catch (error) {
-      console.error('Could not fetch evolution info!');
+      console.error("Could not fetch evolution info!");
     }
-  
+
     this.setState({
       speciesData: speciesResult,
       pokemonData: pokemonResult,
       evolutionData: evolutionDataToShow,
       statChartData,
-      loading: false
+      loading: false,
     });
   }
 
@@ -83,13 +92,13 @@ class PokeDetail extends React.Component {
       pokemonData,
       evolutionData,
       statChartData,
-      loading
+      loading,
     } = this.state;
     const {
       pokemonInfo: { imageSource, name } = {},
     } = this.props.location.state;
 
-    if(loading) return <Spinner/>;
+    if (loading) return <Spinner />;
 
     return (
       <>
@@ -100,9 +109,15 @@ class PokeDetail extends React.Component {
             pokemonData={pokemonData}
             imageSource={imageSource}
           />
-          {!isEmpty(pokemonData.moves) && <Moves movesArr={pokemonData.moves} />}
-          {!isEmpty(statChartData) && <StatChart statChartData={statChartData} chunkCount={chunkCount} />}
-          {!isEmpty(evolutionData) && <PokeEvolution evolutionData={evolutionData} />}
+          {!isEmpty(pokemonData.moves) && (
+            <Moves movesArr={pokemonData.moves} />
+          )}
+          {!isEmpty(statChartData) && (
+            <StatChart statChartData={statChartData} chunkCount={chunkCount} />
+          )}
+          {!isEmpty(evolutionData) && (
+            <PokeEvolution evolutionData={evolutionData} />
+          )}
         </div>
       </>
     );

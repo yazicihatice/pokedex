@@ -48,13 +48,13 @@ export default class CollectionItem extends React.Component {
 
     return (
       <div className={isTouchDevice ? "overlay-touch" : "overlay"}>
-          <div
-            onClick={() => removeFromCollection(pokemon)}
-            className="icon remove-collection-icon"
-            title="Add Collection"
-          >
-            <i className="fa fa-minus-circle fa-xs"></i>
-          </div>
+        <div
+          onClick={() => removeFromCollection(pokemon)}
+          className="icon remove-collection-icon"
+          title="Add Collection"
+        >
+          <i className="fa fa-minus-circle fa-xs"></i>
+        </div>
       </div>
     );
   };
@@ -65,19 +65,23 @@ export default class CollectionItem extends React.Component {
     const { getOverLayDiv, imageClicked } = this;
     const isTouchDevice = this.isTouchDevice();
 
-    return ( <div className={"collection-pokemon-card-list-view"} ref={this.imageContainerRef} onClick={imageClicked(isTouchDevice)}>
+    return (
+      <div
+        className={"collection-pokemon-card-list-view"}
+        ref={this.imageContainerRef}
+        onClick={imageClicked(isTouchDevice)}
+      >
         <div className="collection-pokemon-name-and-image">
           <div className="collection-pokemon-card-name-text">
             {pokemon.name}
           </div>
           <div className="collection-pokemon-list-card-image-wrapper">
-            <img
-              src={pokemon.imageSource}
-              alt="pokemonImage"
-            />
+            <img src={pokemon.imageSource} alt="pokemonImage" />
           </div>
         </div>
-        {isTouchDevice ? (overlayVisible && getOverLayDiv(pokemon, isTouchDevice)) : getOverLayDiv(pokemon, isTouchDevice) }
+        {isTouchDevice
+          ? overlayVisible && getOverLayDiv(pokemon, isTouchDevice)
+          : getOverLayDiv(pokemon, isTouchDevice)}
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./pokemonlist.css";
-import {checkIfTouchDevice} from '../../utils/index';
+import { checkIfTouchDevice } from "../../utils/index";
 
 export default class PokeCardListItem extends React.Component {
   constructor(props) {
@@ -91,10 +91,7 @@ export default class PokeCardListItem extends React.Component {
         <div className="pokemon-name-and-image">
           <div className="pokemon-card-name-text">{pokemon.name}</div>
           <div className="pokemon-list-card-image-wrapper">
-            <img
-              src={pokemon.imageSource}
-              alt="pokemonImage"
-            />
+            <img src={pokemon.imageSource} alt="pokemonImage" />
           </div>
         </div>
         {isTouchDevice

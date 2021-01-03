@@ -9,8 +9,8 @@ class MyCollection extends React.Component {
     super(props);
     this.state = {
       collectionList: {},
-      pageCount:0,
-      currentPage: 0
+      pageCount: 0,
+      currentPage: 0,
     };
   }
 
@@ -19,7 +19,10 @@ class MyCollection extends React.Component {
       ? JSON.parse(localStorage.getItem("myCollection"))
       : {};
     const pageCount = Math.ceil(Object.keys(collectionList).length / LIMIT);
-    collectionList = Object.values(collectionList).slice(this.state.currentPage, LIMIT);
+    collectionList = Object.values(collectionList).slice(
+      this.state.currentPage,
+      LIMIT
+    );
 
     this.setState({ collectionList, pageCount });
   }
@@ -27,30 +30,39 @@ class MyCollection extends React.Component {
   handlePageClick = (data) => {
     const currentPage = data.selected;
     const currentIndex = Math.ceil(currentPage * LIMIT);
-    const collectionList = Object.values(JSON.parse(localStorage.getItem("myCollection"))).slice(currentIndex, currentIndex + LIMIT);
-    
+    const collectionList = Object.values(
+      JSON.parse(localStorage.getItem("myCollection"))
+    ).slice(currentIndex, currentIndex + LIMIT);
+
     this.setState({
       currentPage,
-      collectionList
-    })
+      collectionList,
+    });
   };
 
   removeFromCollection = (pokemon) => {
     let { currentPage } = this.state;
     const selectedPokemonId = pokemon.id;
     const collectionList = JSON.parse(localStorage.getItem("myCollection"));
-    const { [selectedPokemonId]: deletedObj, ...restOfCollectionList } = collectionList;
+    const {
+      [selectedPokemonId]: deletedObj,
+      ...restOfCollectionList
+    } = collectionList;
 
-    const pageCount = Math.ceil(Object.keys(restOfCollectionList).length/ LIMIT);
+    const pageCount = Math.ceil(
+      Object.keys(restOfCollectionList).length / LIMIT
+    );
 
-    localStorage.setItem('myCollection', JSON.stringify(restOfCollectionList));
+    localStorage.setItem("myCollection", JSON.stringify(restOfCollectionList));
     let newCurrentPage;
     if (currentPage < pageCount) {
       newCurrentPage = currentPage;
     } else {
-      newCurrentPage = pageCount - 1; 
+      newCurrentPage = pageCount - 1;
     }
-    this.setState({ pageCount }, () => this.handlePageClick({ selected: newCurrentPage }));
+    this.setState({ pageCount }, () =>
+      this.handlePageClick({ selected: newCurrentPage })
+    );
   };
 
   render() {
@@ -66,7 +78,11 @@ class MyCollection extends React.Component {
         <div className={"collection-pokemon-list-container"}>
           {collectionArray.length ? (
             collectionArray.map((pokemon) => (
-              <CollectionItem pokemon={pokemon} key={pokemon.name} removeFromCollection={removeFromCollection}/>
+              <CollectionItem
+                pokemon={pokemon}
+                key={pokemon.name}
+                removeFromCollection={removeFromCollection}
+              />
             ))
           ) : (
             <span>You've got no pokemon in your collection.</span>

@@ -1,104 +1,103 @@
-
 .poke-card-container {
-    width: 100%;
-    border-radius: 20px;
-    padding: 5px;
-    border-style: solid;
-    border-width: 2px;
+  width: 100%;
+  border-radius: 20px;
+  padding: 5px;
+  border-style: solid;
+  border-width: 2px;
 }
 
 .black-card-container {
-    background-color: #6e7377;
-    border-color: #0d0f10;
+  background-color: #6e7377;
+  border-color: #0d0f10;
 }
 .white-card-container- .gray-card-container {
-    background-color: #eef6fd;
-    border-color: #dfedf9;
+  background-color: #eef6fd;
+  border-color: #dfedf9;
 }
-.green-card-container{
-    background-color:#D5F7C3;
-    border-color: #74BF4D;
+.green-card-container {
+  background-color: #d5f7c3;
+  border-color: #74bf4d;
 }
-.blue-card-container{
-    background-color:#DCE3F5;
-    border-color: #5C87ED;
+.blue-card-container {
+  background-color: #dce3f5;
+  border-color: #5c87ed;
 }
-.brown-card-container{
-    background-color:#F2F2E9;
-    border-color: #C7C7AB
+.brown-card-container {
+  background-color: #f2f2e9;
+  border-color: #c7c7ab;
 }
-.red-card-container{
-    background-color:#F7BC92;
-    border-color:#D45D08;
-}
-
-.yellow-card-container{
-    background-color:#e0c969;
-    border-color: #E0C969;
+.red-card-container {
+  background-color: #f7bc92;
+  border-color: #d45d08;
 }
 
-.purple-card-container{
-    background-color: #a094a0;
-    border-color:#774977;
+.yellow-card-container {
+  background-color: #e0c969;
+  border-color: #e0c969;
 }
 
-.pink-card-container{
-    background-color: #FFD9F6;
-    border-color:#ED66CC;
+.purple-card-container {
+  background-color: #a094a0;
+  border-color: #774977;
 }
 
-.poke-card-info-field{
-    background-color: white;
-    border-radius: 20px;
-    width: 45%;
-    text-align: center;
-    padding: 5px;
-    /* border: 1px solid #74BF4D; */
-    text-overflow: ellipsis;
-    overflow: hidden;
+.pink-card-container {
+  background-color: #ffd9f6;
+  border-color: #ed66cc;
 }
 
-.poke-card-info-field-wrapper{
-    display: flex;
-    justify-content: space-around;
-    font-size: 13px;
+.poke-card-info-field {
+  background-color: white;
+  border-radius: 20px;
+  width: 45%;
+  text-align: center;
+  padding: 5px;
+  /* border: 1px solid #74BF4D; */
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
-.poke-card-field-title{
-    width: 50%;
-    text-align: center;
-    padding: 3px;
+.poke-card-info-field-wrapper {
+  display: flex;
+  justify-content: space-around;
+  font-size: 13px;
 }
 
-.poke-card-field-title-left{
-    border-right: 1px solid black;
+.poke-card-field-title {
+  width: 50%;
+  text-align: center;
+  padding: 3px;
+}
+
+.poke-card-field-title-left {
+  border-right: 1px solid black;
 }
 
 .poke-card-row-wrapper {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
-.poke-card-field-title-wrapper{
-    font-weight: 600;
-    font-size: 12px;
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 5px;
+.poke-card-field-title-wrapper {
+  font-weight: 600;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 5px;
 }
 
-.pokemon-card-image-wrapper{
-    display: flex;
-    justify-content: center;
-    background-color: white;
-    border-radius: 20px;
-    cursor: pointer;
-    margin-bottom: 10px;
+.pokemon-card-image-wrapper {
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-bottom: 10px;
 }
 
-.pokemon-card-header{
-    margin: 10px;
-    text-align: center;
-    font-weight: 500;
-    font-size: 18px;
-    text-transform: capitalize;
+.pokemon-card-header {
+  margin: 10px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 18px;
+  text-transform: capitalize;
 }

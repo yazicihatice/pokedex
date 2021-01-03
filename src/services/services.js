@@ -1,12 +1,12 @@
 import instance from "../axiosConfig";
 
 export const getPokemonList = (limit, offset) => {
-    return instance.get("pokemon", {
-      params: {
-        limit,
-        offset,
-      },
-    });
+  return instance.get("pokemon", {
+    params: {
+      limit,
+      offset,
+    },
+  });
 };
 
 export const getPokemonInfo = (id) => {

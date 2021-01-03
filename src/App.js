@@ -5,7 +5,6 @@ import MyCollection from "./components/MyCollection/MyCollection";
 import PokeDetail from "./components/PokeDetail/PokeDetail";
 
 export default function App() {
-
   return (
     <Router>
       <div>
