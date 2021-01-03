@@ -54,7 +54,7 @@ class MyCollection extends React.Component {
   };
 
   render() {
-    const { collectionList } = this.state;
+    const { collectionList, pageCount, currentPage } = this.state;
     const { removeFromCollection } = this;
     const collectionArray = Object.values(collectionList);
 
@@ -78,7 +78,8 @@ class MyCollection extends React.Component {
             nextLabel={"next"}
             breakLabel={"..."}
             breakClassName={"break-me"}
-            pageCount={this.state.pageCount}
+            pageCount={pageCount}
+            forcePage={currentPage}
             marginPagesDisplayed={2}
             pageRangeDisplayed={5}
             onPageChange={this.handlePageClick}
